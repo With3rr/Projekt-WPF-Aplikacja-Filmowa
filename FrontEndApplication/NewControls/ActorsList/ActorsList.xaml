@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="FrontEndApplication.NewControls.ActorsList.ActorsList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FrontEndApplication.NewControls.ActorsList"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1194">
+    <ScrollViewer Height="710" VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
+        <StackPanel Margin="0,20" Width="1194"  ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectiveScrollingGrid.SelectiveScrollingOrientation="None" ScrollViewer.IsDeferredScrollingEnabled="False" VirtualizingPanel.ScrollUnit="Pixel" >
+            <TextBlock  Height="56" VerticalAlignment="Top" x:Name="actorListTitle" FontSize="40" Margin="5,5" Foreground="White" Background="#FF706E74"></TextBlock>
+            
+            
+
+
+           
+
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom"    ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectiveScrollingGrid.SelectiveScrollingOrientation="None" ScrollViewer.IsDeferredScrollingEnabled="False" VirtualizingPanel.ScrollUnit="Pixel" Margin="0,50,0,97" >
+                <Grid  Margin="0,10"   Height="30" >
+                    <TextBox x:Name="ActorSearchbyNameTB" Style="{StaticResource TextBoxStyle}" Width="400" HorizontalAlignment="Left" TextChanged="TextBox_TextChanged" ></TextBox>
+
+                    <WrapPanel HorizontalAlignment="Right"  Width="100" >
+                        <Button  Style="{StaticResource  TBSecondStyle}" Height="30" Width="30" Click="Button_Click_8" >
+                            <Image x:Name="leftarrowMovie"  >
+
+                            </Image>
+                        </Button>
+
+                        <Label x:Name="ActorSide" Width="40" Content="1"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"      Style="{StaticResource LabelStyle}" Background="#FF7A7777"  ></Label>
+                        <Button Click="Button_Click_10"  Style="{StaticResource TBSecondStyle}" Width="30" >
+                            <Image x:Name="rightarrowMovie"  OpacityMask="#FF685E5E"></Image>
+                        </Button>
+                    </WrapPanel>
+
+                </Grid>
+                <Grid Margin="0,10"    Width="700" >
+                    <DataGrid  ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectiveScrollingGrid.SelectiveScrollingOrientation="None" MouseLeftButtonDown="ActorsDG_MouseLeftButtonDown" ScrollViewer.IsDeferredScrollingEnabled="False" VirtualizingPanel.ScrollUnit="Pixel"   Margin="0,5"  x:Name="ActorsDG" Width="700" HorizontalAlignment="Left"   AutoGenerateColumns="False" IsReadOnly="True"  VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" GridLinesVisibility="None" HeadersVisibility="None" BorderThickness="0.1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"  >
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="DataGridRow">
+                                <EventSetter Event="RequestBringIntoView" Handler="DataGridRow_RequestBringIntoView"></EventSetter>
+
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                        <DataGrid.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Width="700" >
+                                </StackPanel>
+                            </ItemsPanelTemplate>
+                        </DataGrid.ItemsPanel>
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid  Height="200" Width="697"  Style="{StaticResource panelGridow}">
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30" ></RowDefinition>
+                                                <RowDefinition Height="20" ></RowDefinition>
+                                                <RowDefinition Height="50"></RowDefinition>
+                                                <RowDefinition Height="50"></RowDefinition>
+                                                <RowDefinition Height="50"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="140"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Grid.Column="0" Grid.RowSpan="5" Grid.Row="0"  Height="200" Width="140"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Source="{Binding PicturePath,Converter={StaticResource UriStringConverter}}"  ></Image>
+                                            <TextBlock Grid.Row="0" HorizontalAlignment="Left" Grid.Column="1"   Text="{Binding Name}" Style="{StaticResource TbStyle}" FontSize="25" TextWrapping="Wrap" Margin="2,0"  ></TextBlock>
+                                            <TextBlock Grid.Row="1" Grid.Column="1"   Text="{Binding DateOfBirth,StringFormat=MM/dd/yyyy}" Style="{StaticResource TbStyle}" FontSize="15" TextWrapping="Wrap" Margin="2,0"   ></TextBlock>
+                                            <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Margin="2,3" Text="{Binding StringFormat={}{0} lata/lat,Path=Age}" Style="{StaticResource TbStyle}" FontSize="15"  Width="200" TextWrapping="Wrap" HorizontalAlignment="Left"></TextBlock>
+                                            <TextBlock Grid.Column="1" VerticalAlignment="Bottom" Margin="2,0,0,3"     Text="{Binding PlaceOfBirth}" Style="{StaticResource TbStyle}" FontSize="20"  TextWrapping="Wrap"  Grid.Row="4"></TextBlock>
+
+
+
+
+
+
+
+                                        </Grid>
+
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </Grid>
+
+            </StackPanel>
+
+        </StackPanel>
+
+    </ScrollViewer>
+    
+</UserControl>

@@ -1,0 +1,80 @@
+﻿<Window x:Class="FrontEndApplication.FriendsWindowWithData.FriendsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FrontEndApplication.FriendsWindowWithData"
+        mc:Ignorable="d"
+         Height="550" Width="350" ResizeMode="CanMinimize" Closed="Window_Closed"  x:Name="WF" LocationChanged="WF_LocationChanged" >
+    <StackPanel Style="{StaticResource panelGridow}" >
+        <WrapPanel Height="60" VerticalAlignment="Top" >
+            <Image x:Name="friendAvatarImage" Source="{Binding Converter={StaticResource UriStringConverter}}"  Width="40" Height="40" Margin="10,10" />
+            <TextBlock x:Name="WFname" Style="{StaticResource TbStyleMain}" FontSize="15" Margin="5,0" Width="120"  VerticalAlignment="Center"></TextBlock>
+            <Button Click="Button_Click" Margin="110,0,0,0" Style="{StaticResource StylButtonApp}" Height="30" Width="30" RenderTransformOrigin="1,0.58"  Foreground="{x:Null}" BorderBrush="#FF4B4848">
+                <Image x:Name="addFriendImage" Opacity="0.4">
+                    <Image.ToolTip>
+                        <StackPanel>
+                            <TextBlock Text="Dodaj do znajomych" Style="{StaticResource TbStyleMain}" FontSize="10">
+                            </TextBlock>
+                            <TextBlock Text="+4 pkt." Style="{StaticResource TbStyleMain}" FontSize="10"></TextBlock>
+                        </StackPanel>
+                    </Image.ToolTip>
+                </Image>
+            </Button>
+        </WrapPanel>
+        <WrapPanel Height="40" Style="{StaticResource  MainSecondPanelsLook}">
+            <TextBlock Margin="5,7.5,0,7.5" Style="{StaticResource TbStyle}" VerticalAlignment="Center" FontSize="20" Text="Znajomi" Height="24" />
+            <TextBox TextChanged="MovieSearchTB_TextChanged"  Margin="40,7.5,0,7.5"   HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" x:Name="MovieSearchTB" Width="200"  Style="{StaticResource TextBoxStyle}" ></TextBox>
+           
+
+
+
+        </WrapPanel>
+        <ScrollViewer VerticalAlignment="Top" Height="420"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid>
+
+                <DataGrid x:Name="friendsListDG" MouseLeftButtonDown="friendsListDG_MouseLeftButtonDown"   AutoGenerateColumns="False" IsReadOnly="True"  VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" GridLinesVisibility="None" HeadersVisibility="None" BorderThickness="0.1" Background="{x:Null}">
+                    <DataGrid.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel>
+                            </StackPanel>
+                        </ItemsPanelTemplate>
+                    </DataGrid.ItemsPanel>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Height="40"  Width="330"  Style="{StaticResource  MainSecondPanelsLook}" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Margin="2,2,2,2" Source="{Binding Picture,Converter={StaticResource UriStringConverter}}"  Grid.Column="0"></Image>
+                                        <TextBlock Style="{StaticResource TbStyle}" VerticalAlignment="Center" Text="{Binding Login}" Grid.Column="1" FontSize="16" Margin="5,0"  Background="{x:Null}"></TextBlock>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Popup x:Name="FriendOptionsPP" PlacementTarget="{Binding ElementName=friendsListDG}"  Height="250" Width="150" OpacityMask="#FF615050"  PopupAnimation="Scroll" AllowsTransparency="True" Visibility="Visible">
+                    <Border BorderThickness="2" BorderBrush="Gray">
+                        <StackPanel Margin="3,3,3,3"  Style="{StaticResource  MainSecondPanelsLook}" Height="240" >
+                            <Button Margin="5,5,5,5" Height="20" FontSize="12" Style="{StaticResource   StylButtonApp}" Width="120"  Content="Wiadomości" Click="Button_Click_1"></Button>
+                            <Button Margin="5,0,5,5" Height="20" FontSize="12" Style="{StaticResource   StylButtonApp}"  Width="120"  Content="Zobacz Profil" Click="Button_Click_2"></Button>
+                            <Button Margin="5,0,5,5" Height="20" FontSize="12" Style="{StaticResource   StylButtonApp}"  Width="120"  Content="Usuń znajomego" Click="Button_Click_3"></Button>
+
+                        </StackPanel>
+                    </Border>
+                </Popup>
+            </Grid>
+           
+        </ScrollViewer>
+        
+
+
+
+    </StackPanel>
+</Window>
